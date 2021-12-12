@@ -21,6 +21,7 @@ const getBooks = (res) => {
             res.status(400);
             res.send(BadRequestException(`Error when fetching the books`, `${error.message}`));
         } else {
+            infoLog.info(`Gel all books = '${books}'`);
             res.status(200);
             res.send(books);
         }
@@ -48,7 +49,7 @@ const getBookById = (id, res) => {
             res.status(400);
             res.send(BadRequestException(`Error when fetching the book with id '${id}'`, `${error.message}`));
         } else if (book != null) {
-            infoLog.info(`${book}`);
+            infoLog.info(`book = ${book}`);
             res.status(200);
             res.send(book);
         } else {
@@ -59,12 +60,21 @@ const getBookById = (id, res) => {
 }
 
 /**
- * Create a book
- * @param {*} req 
+ * Create a new book
+ * @param { Book } payload 
  * @param {*} res 
  */
-const createBook = (req, res) => {
-    
+const createBook = (payload, res) => {
+    Book.create(payload, (error, createdBook) => {
+        if (error) {
+            errorLog.error(`Error occurred while creating the book.`, `${error.message}`);
+            res.send(400);
+            res.send(BadRequestException(`Error occurred while creating the book.`, `${error.message}`))
+        } else {
+            infoLog.info(`Book created - ${createdBook}`);
+            res.send(createdBook);
+        }
+    });
 }
 
 module.exports = {

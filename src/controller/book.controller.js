@@ -3,7 +3,7 @@
  */
 const express = require('express');
 const router = express.Router();
-const { model } = require('mongoose');
+
 const { Book } = require('../models/book.model');
 
 const { BadRequestException, NotFoundException } = require('../middleware/error.middleware');
@@ -36,7 +36,13 @@ router.get('/books/:id', (req, res) => {
  * Purpose - Create a new book
  */
 router.post('/books', (req, res) => {
-    return bookFunctions.createBook(req, res);
+    const payload = new Book({
+        title: req.body.title,
+        author: req.body.author,
+        imageUrl: req.body.imageUrl,
+        description: req.body.description
+    });
+    return bookFunctions.createBook(payload, res);
 });
 
 const BookRoutes = router;
