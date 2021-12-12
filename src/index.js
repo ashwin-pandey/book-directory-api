@@ -24,9 +24,10 @@ app.use((req, res, next) => {
  * ROUTE HANDLERS
  */
 
-/** BOOKS ROUTE */
+/* BOOKS ROUTE */
 app.use('/', BookRoutes);
 
+/* START THE SERVER */
 const port = process.env.PORT;
 app.listen(port, (error) => {
     if (error) {

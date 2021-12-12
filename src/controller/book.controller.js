@@ -20,7 +20,7 @@ const bookFunctions = require('../functions/book.function');
  * Purpose - Get all the books 
  */
 router.get('/books', (req, res) => {
-    return bookFunctions.getBooks(res);
+    return bookFunctions.getBooks(req, res);
 });
 
 /**
@@ -43,6 +43,26 @@ router.post('/books', (req, res) => {
         description: req.body.description
     });
     return bookFunctions.createBook(payload, res);
+});
+
+router.put('/books/:id', (req, res) => {
+    const payload = new Book({
+        _id: req.params.id,
+        title: req.body.title,
+        author: req.body.author,
+        imageUrl: req.body.imageUrl,
+        description: req.body.description,
+        modifiedDate: Date.now() + 7*24*60*60*1000
+    });
+    return bookFunctions.updateBook(payload, req.params.id, res);
+});
+
+router.delete('/books/:id', (req, res) => {
+    return bookFunctions.deleteBook(req.params.id, res);
+});
+
+router.patch('/books/:id', (req, res) => {
+    return bookFunctions.patchBook(req, res);
 });
 
 const BookRoutes = router;

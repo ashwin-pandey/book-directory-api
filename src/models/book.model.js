@@ -1,4 +1,3 @@
-
 // book model
 const mongoose = require('mongoose');
 
@@ -23,6 +22,11 @@ const BookSchema = new mongoose.Schema({
     description: {
         type: String,
         default: null,
+        trim: true
+    },
+    status: {
+        type: String,
+        default: "active",
         trim: true
     },
     createdDate: {
