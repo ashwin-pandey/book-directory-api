@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const statusEnum = require('./status.enum');
 
 const BooksModel = mongoose.Schema({
   name: {
@@ -18,6 +19,13 @@ const BooksModel = mongoose.Schema({
     },
     authorName: String
   },
+  category: {
+    categoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category"
+    },
+    categoryName: String
+  },
   affiliateLinks : [
     {
       linkName: String,
@@ -29,7 +37,18 @@ const BooksModel = mongoose.Schema({
       websiteName: String,
       websiteLink: String
     }
-  ]
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
+  modifiedAt: {
+    type: Date,
+    default: Date.now()
+  },
+  status: {
+    type: String
+  }
 });
 
 module.exports = mongoose.model('Books', BooksModel);
