@@ -1,0 +1,1 @@
+exports.statusEnum = Object.freeze({ 'active': 'active', 'deleted': 'deleted' });
