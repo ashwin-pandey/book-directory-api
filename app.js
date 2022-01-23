@@ -1,6 +1,7 @@
 const express = require('express');
 const { AuthorRouter } = require('./routes/author.routes');
 const { BooksRouter } = require('./routes/books.routes');
+const { CategoryRouter } = require('./routes/category.routes');
 const app = express();
 
 /**ENV CONFIG */
@@ -31,7 +32,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/books', BooksRouter);
-app.use('/author', AuthorRouter);
+app.use('/authors', AuthorRouter);
+app.use('/categories', CategoryRouter);
 
 const port = process.env.PORT;
 app.listen(port, (error) => {
