@@ -54,3 +54,8 @@ exports.createAuthor = (req, res) => {
     return;
   });
 }
+
+
+exports.updateAuthor = (req, res) => {
+  
+}
